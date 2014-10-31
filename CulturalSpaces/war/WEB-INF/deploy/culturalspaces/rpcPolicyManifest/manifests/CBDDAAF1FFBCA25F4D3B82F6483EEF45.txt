@@ -1,0 +1,2 @@
+serviceClass: com.google.gwt.sample.culturalspaces.client.GreetingService
+path: 5AD7C7CB28CB6C1E50199BA509B8C2D9.gwt.rpc
