@@ -25,14 +25,60 @@ private ArrayList<String> names = new ArrayList<String>();
 private LocationServiceAsync locationSvc = GWT.create(LocationService.class);
 
 /**  * Entry point method.  */  
-public void onModuleLoad() {  
-	// TODO Create table for stock data.  
-	// TODO Assemble Add Stock panel.  
-	// TODO Assemble Main panel.  
-	// TODO Associate the Main panel with the HTML host page.  
-	// TODO Move cursor focus to the input box.
+public void onModuleLoad() {
+	// Check login status using login service.
+    LoginServiceAsync loginService = GWT.create(LoginService.class);
+    loginService.login(GWT.getHostPageBaseURL(), new AsyncCallback<LoginInfo>() {
+      public void onFailure(Throwable error) {
+    	  handleError(error);
+      }
+
+      public void onSuccess(LoginInfo result) {
+        loginInfo = result;
+        if(loginInfo.isLoggedIn()) {
+	loadCulturalSpaces();
+        } else {
+            loadLogin();
+          }
+        }
+      });
+    }
+
+private void loadLogin() {
+  // Assemble login panel.
+  signInLink.setHref(loginInfo.getLoginUrl());
+  loginPanel.add(loginLabel);
+  loginPanel.add(signInLink);
+  RootPanel.get("locationList").add(loginPanel);
+    
+}
+
+private void loadCulturalSpaces() {
+	// Set up sign out hyperlink.
+    signOutLink.setHref(loginInfo.getLogoutUrl());
+	
+	// Create table for stock data.  
+	locationsFlexTable.setText(0, 0, "Location Name"); 
+	locationsFlexTable.setText(0, 1, "Address");  
+	   
+	// Assemble Main panel.
+	mainPanel.add(signOutLink);
+    mainPanel.add(locationsFlexTable);
+    mainPanel.add(addPanel);
+    mainPanel.add(lastUpdatedLabel);
+    
+	// TODO Associate the Main panel with the HTML host page.
+    RootPanel.get("locationList").add(mainPanel);
+
 
 }
+
+private void handleError(Throwable error) {
+    Window.alert(error.getMessage());
+    if (error instanceof NotLoggedInException) {
+      Window.Location.replace(loginInfo.getLogoutUrl());
+    }
+  }
 
 private void refreshWatchList() {
     // Initialize the service proxy.
