@@ -8,4 +8,5 @@ public interface LocationServiceAsync {
   public void getLocation(AsyncCallback<String[]> async);
   void getLocationNames(String[] names, AsyncCallback<LocationName[]> callback);
   
+
 }

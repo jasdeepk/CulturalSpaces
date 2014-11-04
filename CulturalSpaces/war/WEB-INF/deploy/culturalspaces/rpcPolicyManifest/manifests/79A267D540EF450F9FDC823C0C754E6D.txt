@@ -1,0 +1,2 @@
+serviceClass: com.google.gwt.sample.culturalspaces.client.LocationService
+path: C389318BAE1F29EA960FE138B179C1CB.gwt.rpc

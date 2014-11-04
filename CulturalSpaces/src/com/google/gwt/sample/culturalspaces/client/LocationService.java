@@ -13,4 +13,5 @@ public interface LocationService extends RemoteService {
   public String[] getLocation() throws NotLoggedInException;
   public LocationName[] getLocationNames(String[] names);
  
+
 }
