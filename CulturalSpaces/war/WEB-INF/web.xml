@@ -16,6 +16,16 @@
     <url-pattern>/culturalspaces/greet</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+    <servlet-name>locationServiceImpl</servlet-name>
+    <servlet-class>com.google.gwt.sample.culturalspaces.server.LocationServiceImpl</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>locationServiceImpl</servlet-name>
+    <url-pattern>/culturalspaces/locations</url-pattern>
+  </servlet-mapping>
+  
   <!-- Default page to serve -->
   <welcome-file-list>
     <welcome-file>CulturalSpaces.html</welcome-file>
