@@ -1,16 +1,16 @@
 package com.google.gwt.sample.culturalspaces.client;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
-
+import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
-
 import com.google.gwt.sample.culturalspaces.client.NotLoggedInException;
+import com.google.gwt.sample.culturalspaces.client.LocationName;
 import com.google.gwt.user.client.Window;
-
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
@@ -93,6 +93,15 @@ private void handleError(Throwable error) {
     }
   }
 
+private void updateTable(LocationName[] names) {
+	for (LocationName name : names)
+		updateTable(name);
+
+	// Display timestamp showing last refresh.
+	lastUpdatedLabel.setText("Last update : "
+			+ DateTimeFormat.getMediumDateTimeFormat().format(new Date()));
+}
+
 
 private void refreshWatchList() {
     // Initialize the service proxy.
@@ -110,6 +119,8 @@ private void refreshWatchList() {
         updateTable(result);
       }
     };
+    
+    
 
     // Make the call to the stock price service.
     locationSvc.getLocationNames(names.toArray(new String[0]), callback);
