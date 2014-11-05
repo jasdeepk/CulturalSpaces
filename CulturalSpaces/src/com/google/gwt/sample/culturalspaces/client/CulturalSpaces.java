@@ -6,6 +6,7 @@ import java.util.Date;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.i18n.client.DateTimeFormat;
+import com.google.gwt.i18n.client.NumberFormat;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.sample.culturalspaces.client.NotLoggedInException;
@@ -25,7 +26,7 @@ private FlexTable locationsFlexTable = new FlexTable();
 private HorizontalPanel addPanel = new HorizontalPanel();     
 private Label lastUpdatedLabel = new Label();
 
-private ArrayList<String> names = new ArrayList<String>();
+private ArrayList<String> locations = new ArrayList<String>();
 private LocationServiceAsync locationSvc = GWT.create(LocationService.class);
 
 private LoginInfo loginInfo = null;
@@ -102,6 +103,37 @@ private void updateTable(LocationName[] names) {
 			+ DateTimeFormat.getMediumDateTimeFormat().format(new Date()));
 }
 
+private void updateTable(LocationName name) {
+	// Make sure the stock is still in the stock table.
+	if (!locations.contains(name.getName())) {
+		return;
+	}
+
+	int row = locations.indexOf(name.getName()) + 1;
+
+	// Format the data in the Price and Change fields.
+//	String addressText = NumberFormat.getFormat("#,##0.00").format(
+//			name.getAddress());
+//	String typeText = NumberFormat.getFormat("#,##0.00").format(
+//			name.getType());
+//	String neighbourhoodText = NumberFormat.getFormat("#,##0.00").format(
+//			name.getNeighbourhood());
+
+	// Populate the Price and Change fields with new data.
+	stocksFlexTable.setText(row, 1, priceText);
+	Label changeWidget = (Label) stocksFlexTable.getWidget(row, 2);
+	changeWidget.setText(changeText + " (" + changePercentText + "%)");
+
+	// Change the color of text in the Change field based on its value.
+	String changeStyleName = "noChange";
+	if (name.getChangePercent() < -0.1f) {
+		changeStyleName = "negativeChange";
+	} else if (name.getChangePercent() > 0.1f) {
+		changeStyleName = "positiveChange";
+	}
+
+	changeWidget.setStyleName(changeStyleName);
+}
 
 private void refreshWatchList() {
     // Initialize the service proxy.
