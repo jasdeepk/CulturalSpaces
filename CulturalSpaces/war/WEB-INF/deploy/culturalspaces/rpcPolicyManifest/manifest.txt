@@ -1,2 +1,4 @@
 # Module culturalspaces
 # RPC service class, partial path of RPC policy file
+com.google.gwt.sample.culturalspaces.client.LocationService, C389318BAE1F29EA960FE138B179C1CB.gwt.rpc
+com.google.gwt.sample.culturalspaces.client.LoginService, B760E55800E93E73329B7939202501F5.gwt.rpc
