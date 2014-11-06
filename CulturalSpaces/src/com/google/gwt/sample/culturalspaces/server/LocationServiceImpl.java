@@ -104,7 +104,6 @@ LocationService {
 
 	@Override
 	public LocationObject[] getLocationObjects() {
-		Random rnd = new Random();
 		LocationObject[] locations = new LocationObject[355];
 
 
