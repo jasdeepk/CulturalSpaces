@@ -6,7 +6,7 @@ public interface LocationServiceAsync {
   public void addLocation(String symbol, AsyncCallback<Void> async);
   public void removeLocation(String symbol, AsyncCallback<Void> async);
   public void getLocation(AsyncCallback<String[]> async);
-  void getLocationNames(String[] names, AsyncCallback<LocationName[]> callback);
+  void getLocationObjects(AsyncCallback<LocationObject[]> callback);
   
 
 }

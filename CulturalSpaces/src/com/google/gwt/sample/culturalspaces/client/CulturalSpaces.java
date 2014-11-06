@@ -10,7 +10,7 @@ import com.google.gwt.i18n.client.NumberFormat;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.sample.culturalspaces.client.NotLoggedInException;
-import com.google.gwt.sample.culturalspaces.client.LocationName;
+import com.google.gwt.sample.culturalspaces.client.LocationObject;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -94,8 +94,8 @@ private void handleError(Throwable error) {
     }
   }
 
-private void updateTable(LocationName[] names) {
-	for (LocationName name : names)
+private void updateTable(LocationObject[] names) {
+	for (LocationObject name : names)
 		updateTable(name);
 
 	// Display timestamp showing last refresh.
@@ -103,7 +103,7 @@ private void updateTable(LocationName[] names) {
 			+ DateTimeFormat.getMediumDateTimeFormat().format(new Date()));
 }
 
-private void updateTable(LocationName name) {
+private void updateTable(LocationObject name) {
 	// Make sure the stock is still in the stock table.
 	if (!locations.contains(name.getName())) {
 		return;
@@ -142,12 +142,12 @@ private void refreshWatchList() {
     }
 
     // Set up the callback object.
-    AsyncCallback<LocationName[]> callback = new AsyncCallback<LocationName[]>() {
+    AsyncCallback<LocationObject[]> callback = new AsyncCallback<LocationObject[]>() {
       public void onFailure(Throwable caught) {
         // TODO: Do something with errors.
       }
 
-      public void onSuccess(LocationName[] result) {
+      public void onSuccess(LocationObject[] result) {
         updateTable(result);
       }
     };
@@ -155,7 +155,7 @@ private void refreshWatchList() {
     
 
     // Make the call to the stock price service.
-    locationSvc.getLocationNames(names.toArray(new String[0]), callback);
+    locationSvc.getLocationObjects(names.toArray(new String[0]), callback);
 
 
 }
