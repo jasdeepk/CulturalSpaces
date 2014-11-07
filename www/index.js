@@ -1,3 +1,5 @@
-(function ($) {
-	//
-})(jQuery)
+require(["jquery"], function ($) {
+	$.ready(function () {
+		
+	})
+})
