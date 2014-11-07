@@ -2,6 +2,7 @@ require(["jquery"], (function ($) {
 	console.log("required");
 	function fillTable (rows) {
 		var $table = $("#table");
+		debugger;
 		for (var i = 0; i <= rows.length-1; i++)
 		{
 			var row = rows[i];
@@ -12,7 +13,7 @@ require(["jquery"], (function ($) {
 					.append("<td>"+row['name']+"</td>")
 					.append("<td>"+row['addr']+"</td>")
 			;
-			$table.append(row);
+			$table.append($row);
 		}
 	}
 	
@@ -20,6 +21,6 @@ require(["jquery"], (function ($) {
 		console.log("ready");
 		debugger;
 		var locationRequest = $.getJSON("locations.php");
-		locationRequest.done(function (data) {fillTable(data);});
+		locationRequest.done(function (data) {console.log("done");fillTable(data);});
 	});
 }));
