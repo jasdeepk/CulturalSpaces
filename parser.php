@@ -2,7 +2,7 @@
 $databasehost = "localhost"; 
 $databasename = "culturalspaces"; 
 $databasetable = "locations"; 
-$databaseusername=""; 
+$databaseusername="root"; 
 $databasepassword = ""; 
 $fieldseparator = ","; 
 $lineseparator = "\n";
@@ -13,13 +13,16 @@ if(!file_exists($csvfile)) {
 }
 
 try {
-    $pdo = new PDO("mysql:host=$databasehost;dbname=$databasename", 
+    /*
+    $pdo = new PDO("mysql:host=$databasehost;port=3306;dbname=$databasename", 
         $databaseusername, $databasepassword,
         array(
             PDO::MYSQL_ATTR_LOCAL_INFILE => true,
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
         )
     );
+    */
+    $pdo = new PDO('mysql:host=localhost;port=3306;dbname=culturalspaces', "root", "root", array(PDO::MYSQL_ATTR_LOCAL_INFILE=>1));
 } catch (PDOException $e) {
     die("database connection failed: ".$e->getMessage());
 }

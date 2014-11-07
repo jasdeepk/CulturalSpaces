@@ -19,13 +19,13 @@ require(["jquery"], (function ($) {
 	function fillMap(locations) {
    
   var mapOptions = {
-    zoom: 4,
-    center: myLatlng
-  }
-  var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+          center: { lat: 49.2500, lng: -123.1000},
+          zoom: 12
+        };
+ var map = new google.maps.Map(document.getElementById('map-canvas'),
+            mapOptions);
 
- for (var i = 1; i >= locations.length - 1; i++) {
- 	debugger;
+ for (var i = 0; i <= locations.length - 1; i++) {
  	var location = locations[i];
     var lat = parseInt(location['lat']);
     var lon = parseInt(location['lon']);
@@ -42,7 +42,6 @@ require(["jquery"], (function ($) {
 	$(document).ready(function () {
 		console.log("ready");
 		var locationRequest = $.getJSON("locations.php");
-		locationRequest.done(function (data) {console.log("done");fillTable(data);
-											  console.log("done");fillMap(data);});
+		locationRequest.done(function (data) {console.log("done");fillTable(data);fillMap(data);});
 	});
 }));
