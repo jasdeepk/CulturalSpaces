@@ -4,7 +4,8 @@
     <style type="text/css">
       html { height: 100% }
       body { height: 100%; margin: 0; padding: 0 }
-      #map-canvas { height: 100% }
+      #map-canvas { height: 40%; 
+                     width: 40%;}
     </style>
     <script type="text/javascript"
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCDJ525-htk7oLSiDCX3FopEs1UBY2K4JA">
@@ -22,6 +23,45 @@
 
 
       google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
+        <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+    <script>
+function initialize() {
+  var myLatlng = new google.maps.LatLng(49.233444,-123.121991);
+  var myLatlng2 = new google.maps.LatLng(49.3334644,-123.126991);
+  var myLatlng3 = new google.maps.LatLng(49.433544,-123.123791);
+  var myLatlng4 = new google.maps.LatLng(49.533744,-123.125891);
+
+  var mapOptions = {
+    zoom: 4,
+    center: myLatlng
+  }
+  var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+  var marker = new google.maps.Marker({
+      position: myLatlng,
+      map: map,
+      title: 'Hello World!'
+  });
+    var marker = new google.maps.Marker({
+      position: myLatlng2,
+      map: map,
+      title: 'Hello World!'
+  });
+      var marker = new google.maps.Marker({
+      position: myLatlng3,
+      map: map,
+      title: 'Hello World!'
+  });
+        var marker = new google.maps.Marker({
+      position: myLatlng4,
+      map: map,
+      title: 'Hello World!'
+  });
+}
+
+google.maps.event.addDomListener(window, 'load', initialize);
+
     </script>
   </head>
   <body>
