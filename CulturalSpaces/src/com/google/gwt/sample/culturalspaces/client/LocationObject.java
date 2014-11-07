@@ -58,19 +58,19 @@ public class LocationObject {
 		this.neighbourhood = neighbourhood;
 	}
 
-	public int getLon() {
+	public String getLon() {
 		return lon;
 	}
 
-	public void setLon(int lon) {
+	public void setLon(String lon) {
 		this.lon = lon;
 	}
 
-	public int getLat() {
+	public String getLat() {
 		return lat;
 	}
 
-	public void setLat(int lat) {
+	public void setLat(String lat) {
 		this.lat = lat;
 	}
 

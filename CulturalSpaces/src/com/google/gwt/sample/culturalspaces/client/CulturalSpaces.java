@@ -144,46 +144,9 @@ private void handleError(Throwable error) {
     }
   }
 
-private void updateTable(LocationObject[] names) {
-	for (LocationObject name : names)
-		updateTable(name);
+/*
 
-	// Display timestamp showing last refresh.
-	lastUpdatedLabel.setText("Last update : "
-			+ DateTimeFormat.getMediumDateTimeFormat().format(new Date()));
-}
 
-private void updateTable(LocationObject name) {
-	// Make sure the stock is still in the stock table.
-	if (!locations.contains(name.getName())) {
-		return;
-	}
-
-	int row = locations.indexOf(name.getName()) + 1;
-
-	// Format the data in the Price and Change fields.
-//	String addressText = NumberFormat.getFormat("#,##0.00").format(
-//			name.getAddress());
-//	String typeText = NumberFormat.getFormat("#,##0.00").format(
-//			name.getType());
-//	String neighbourhoodText = NumberFormat.getFormat("#,##0.00").format(
-//			name.getNeighbourhood());
-
-	// Populate the Price and Change fields with new data.
-	stocksFlexTable.setText(row, 1, priceText);
-	Label changeWidget = (Label) stocksFlexTable.getWidget(row, 2);
-	changeWidget.setText(changeText + " (" + changePercentText + "%)");
-
-	// Change the color of text in the Change field based on its value.
-	String changeStyleName = "noChange";
-	if (name.getChangePercent() < -0.1f) {
-		changeStyleName = "negativeChange";
-	} else if (name.getChangePercent() > 0.1f) {
-		changeStyleName = "positiveChange";
-	}
-
-	changeWidget.setStyleName(changeStyleName);
-}
 
 private void refreshWatchList() {
     // Initialize the service proxy.
@@ -208,6 +171,6 @@ private void refreshWatchList() {
     locationSvc.getLocationObjects(names.toArray(new String[0]), callback);
 
 
-}
+}*/
 
 }
