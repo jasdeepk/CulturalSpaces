@@ -1,8 +1,8 @@
 <?php
 $databasehost = "localhost"; 
-$databasename = "test"; 
-$databasetable = "sample"; 
-$databaseusername="test"; 
+$databasename = "culturalspaces"; 
+$databasetable = "locations"; 
+$databaseusername=""; 
 $databasepassword = ""; 
 $fieldseparator = ","; 
 $lineseparator = "\n";
