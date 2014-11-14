@@ -6,7 +6,7 @@ $databaseusername="root";
 $databasepassword = ""; 
 $fieldseparator = ","; 
 $lineseparator = "\n";
-$csvfile = "CulturalSpaces.csv";
+$csvfile = "CulturalSpacesOG.csv";
 
 if(!file_exists($csvfile)) {
     die("File not found. Make sure you specified the correct path.");
