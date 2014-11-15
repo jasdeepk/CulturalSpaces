@@ -1,4 +1,4 @@
-require(["jquery"], (function ($) {
+require(["jquery", "datatables"], (function ($) {
 	console.log("required");
 	function fillTable (rows) {
 		var $table = $("#table");
@@ -11,9 +11,6 @@ require(["jquery"], (function ($) {
 					.append("<td>"+row['lon']+"</td>")
 					.append("<td>"+row['name']+"</td>")
 					.append("<td>"+row['addr']+"</td>")
-					.append("<td>"+row['web']+"</td>")
-					.append("<td>"+row['type']+"</td>")
-					.append("<td>"+row['hood']+"</td>")
 			;
 			$table.append($row);
 		}
@@ -45,6 +42,13 @@ require(["jquery"], (function ($) {
 	$(document).ready(function () {
 		console.log("ready");
 		var locationRequest = $.getJSON("locations.php");
-		locationRequest.done(function (data) {console.log("done");fillTable(data);fillMap(data);});
+		locationRequest.done(
+			function (data) {
+				console.log("done");
+				fillTable(data);
+				$("#table").DataTable();
+				fillMap(data);
+			}
+		);
 	});
 }));
