@@ -59,20 +59,20 @@
                     }
                 </script>
                 <!-- end google sign-in -->
-                <script data-main="index" src="require.js"></script>
-                <script type="text/javascript">
-                    require.config({
-                            //baseUrl: '',
-                            paths: {
-                                    jquery: 'jquery-2.1.1'
-                            }
-                    });
-                </script>
+        <script data-main="index" src="require.js"></script>
+        <script type="text/javascript">
+            require.config({
+                //baseUrl: '',
+                paths: {
+                    jquery: 'jquery-2.1.1',
+                    datatables: 'jquery.dataTables'
+                },
+                shim: {
+                    "datatables": ["jquery"]
+                }
+            });
+        </script>
 
-        // Added share button, works without locations.
-        <script src="https://apis.google.com/js/platform.js" async defer></script>
-        <g:plus action="share"></g:plus>
-             
         <style type="text/css">
             html { height: 100% }
             body { height: 100%; margin: 0; padding: 0 }
