@@ -37,6 +37,7 @@ require(["jquery", "datatables"], (function ($) {
       position: myLatlng,
       map: map,
       title: 'Hello World!'
+      // String(locations[2])
   });
     };
 
@@ -49,10 +50,11 @@ require(["jquery", "datatables"], (function ($) {
 			function (data) {
 				console.log("done");
 				fillTable(data);
+				fillMap(data);
 				$("#table").DataTable({
             "sPaginationType": "full_numbers"
         } );
-				fillMap(data);
+				
 			}
 		);
 	});
