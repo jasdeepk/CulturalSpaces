@@ -11,7 +11,9 @@ require(["jquery", "datatables"], (function ($) {
 					.append("<td>"+row['lon']+"</td>")
 					.append("<td>"+row['name']+"</td>")
 					.append("<td>"+row['addr']+"</td>")
-			;
+					.append("<td>"+row['addr']+"</td>")
+					.append("<td>"+row['addr']+"</td>")
+					.append("<td>"+row['addr']+"</td>");
 			$table.append($row);
 		}
 	}
@@ -27,8 +29,8 @@ require(["jquery", "datatables"], (function ($) {
 
  for (var i = 0; i <= locations.length - 1; i++) {
  	var location = locations[i];
-    var lat = parseInt(location['lat']);
-    var lon = parseInt(location['lon']);
+    var lat = parseFloat(location['lat']);
+    var lon = parseFloat(location['lon']);
     var myLatlng = new google.maps.LatLng(lat,lon);
     var marker = new google.maps.Marker({
       position: myLatlng,
