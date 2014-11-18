@@ -11,6 +11,9 @@ require(["jquery", "datatables"], (function ($) {
 					.append("<td>"+row['lon']+"</td>")
 					.append("<td>"+row['name']+"</td>")
 					.append("<td>"+row['addr']+"</td>")
+					.append("<td>"+row['web']+"</td>")
+					.append("<td>"+row['type']+"</td>")
+					.append("<td>"+row['hood']+"</td>")
 			;
 			$table.append($row);
 		}
