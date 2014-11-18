@@ -39,8 +39,7 @@
                 }
         	});
         </script>
-        <script src="https://apis.google.com/js/platform.js" async defer></script>
-        <g:plus action="share"></g:plus>
+
 
         <head>
     <style type="text/css">
@@ -53,9 +52,15 @@
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCDJ525-htk7oLSiDCX3FopEs1UBY2K4JA">
     </script>
         <!--<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>-->
+    </script>
+    <!-- Google+ share API -->
+    <script src="https://apis.google.com/js/platform.js" async defer>
+    </script>
     </head>
     <body>
         <div id="map-canvas"></div>
+        <!-- Google+ share button placed below the map. -->
+        <div class="g-plus" data-action="share" data-annotation="bubble" data-height="24"></div>
         <!-- Google sign-in button-->
         <span id="signinButton">
 			<span
@@ -75,5 +80,6 @@
 				<td>Name</td>
 				<td>Address</td>
 			</thead>
+        
     </body>
 </html>
