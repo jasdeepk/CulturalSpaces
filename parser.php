@@ -4,7 +4,8 @@ $databasename = "culturalspaces";
 $databasetable = "locations"; 
 $databaseusername="root"; 
 $databasepassword = ""; 
-$fieldseparator = ","; 
+$fieldseparator = ",";
+$fieldenclosure = '\"'; 
 $lineseparator = "\n";
 $csvfile = "CulturalSpacesOG.csv";
 
@@ -27,10 +28,16 @@ try {
     die("database connection failed: ".$e->getMessage());
 }
 
+//clear table
+$pdo->exec("TRUNCATE TABLE locations");
+//parse file's data into table
+
 $affectedRows = $pdo->exec("
     LOAD DATA LOCAL INFILE ".$pdo->quote($csvfile)." INTO TABLE `$databasetable`
-      FIELDS TERMINATED BY ".$pdo->quote($fieldseparator)."
+      
+      FIELDS OPTIONALLY ENCLOSED BY '\"' TERMINATED BY ".$pdo->quote($fieldseparator)." 
       LINES TERMINATED BY ".$pdo->quote($lineseparator));
+
 
 echo "Loaded a total of $affectedRows records from this csv file.\n";
 
