@@ -26,7 +26,9 @@ try {
 } catch (PDOException $e) {
     die("database connection failed: ".$e->getMessage());
 }
-
+//clear table
+$pdo->exec("TRUNCATE TABLE locations");
+//parse file's data into table
 $affectedRows = $pdo->exec("
     LOAD DATA LOCAL INFILE ".$pdo->quote($csvfile)." INTO TABLE `$databasetable`
       FIELDS TERMINATED BY ".$pdo->quote($fieldseparator)."
