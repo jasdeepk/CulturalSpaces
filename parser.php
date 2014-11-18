@@ -30,8 +30,8 @@ try {
 
 //clear table
 $pdo->exec("TRUNCATE TABLE locations");
-//parse file's data into table
 
+//parse file's data into table
 $affectedRows = $pdo->exec("
     LOAD DATA LOCAL INFILE ".$pdo->quote($csvfile)." INTO TABLE `$databasetable`
       
