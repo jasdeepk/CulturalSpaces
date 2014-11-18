@@ -36,7 +36,7 @@ require(["jquery", "datatables"], (function ($) {
     var marker = new google.maps.Marker({
       position: myLatlng,
       map: map,
-      title: String.fromCharCode(locations[2])
+      title: location.name
   });
     };
 
