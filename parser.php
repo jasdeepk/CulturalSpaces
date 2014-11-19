@@ -29,7 +29,7 @@ try {
 
 $affectedRows = $pdo->exec("
     LOAD DATA LOCAL INFILE ".$pdo->quote($csvfile)." INTO TABLE `$databasetable`
-      FIELDS TERMINATED BY ".$pdo->quote($fieldseparator)."
+      FIELDS OPTIONALLY ENCLOSED BY '\"' TERMINATED BY ".$pdo->quote($fieldseparator)." 
       LINES TERMINATED BY ".$pdo->quote($lineseparator));
 
 echo "Loaded a total of $affectedRows records from this csv file.\n";
