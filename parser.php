@@ -1,13 +1,13 @@
 <?php
 $databasehost = "localhost"; 
 $databasename = "culturalspaces"; 
-$databasetable = "locations"; 
+$databasetable = "relocations"; 
 $databaseusername="root"; 
 $databasepassword = ""; 
 $fieldseparator = ",";
 $fieldenclosure = '\"'; 
 $lineseparator = "\n";
-$csvfile = "CulturalSpacesOG.csv";
+$csvfile = "CulturalSpaces.csv";
 
 if(!file_exists($csvfile)) {
     die("File not found. Make sure you specified the correct path.");
@@ -29,7 +29,7 @@ try {
 }
 
 //clear table
-$pdo->exec("TRUNCATE TABLE locations");
+$pdo->exec("TRUNCATE TABLE relocations");
 
 //parse file's data into table
 $affectedRows = $pdo->exec("
