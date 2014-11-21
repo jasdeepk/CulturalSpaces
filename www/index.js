@@ -52,6 +52,7 @@ require(["jquery", "datatables"], (function ($) {
 				fillMap(data);
 				$("#table").DataTable({
             "sPaginationType": "full_numbers"
+            
         } );
 				
 			}

@@ -23,22 +23,22 @@ body { height: 100%; margin: 0;
 
 		div.dataTables_length {
 			float: left;
-			background-color: red;
+			
 		}
 
 		div.dataTables_filter {
 			float: right;
-			background-color: green;
+			
 		}
 
 		div.dataTables_info {
 			float: left;
-			background-color: blue;
+			
 		}
 
 		div.dataTables_paginate {
 			float: right;
-			background-color: yellow;
+			
 		}
 
 		div.dataTables_length,
@@ -64,4 +64,19 @@ div.dataTables_wrapper:after {
 html[xmlns] .dataTables_wrapper { display: block; }
 * html .dataTables_wrapper { height: 1%; }
 
+table.pretty {
+    width: 100%;
+    clear: both;
+}
+ 
+table.pretty td,
+table.pretty th {
+    padding: 5px;
+    border: 1px solid #fff;
+}
 
+/* Header cells */
+table.pretty thead th {
+    text-align: center;
+    background: #66a9bd;
+}
