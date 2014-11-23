@@ -1,4 +1,6 @@
 <?php
+ini_set ('user_agent', $_SERVER['HTTP_USER_AGENT']); 
+
 $databasehost = "localhost"; 
 $databasename = "culturalspaces"; 
 $databasetable = "relocations"; 
@@ -7,7 +9,12 @@ $databasepassword = "";
 $fieldseparator = ",";
 $fieldenclosure = '\"'; 
 $lineseparator = "\n";
-$csvfile = "CulturalSpaces.csv";
+$csvfile = file_get_contents( "ftp://webftp.vancouver.ca/opendata/CulturalSpace/CulturalSpaces.csv");
+
+if (!$csvfile) {
+    echo "<p>Unable to open remote file for writing.\n";
+    exit;
+}
 
 if(!file_exists($csvfile)) {
     die("File not found. Make sure you specified the correct path.");
@@ -40,5 +47,7 @@ $affectedRows = $pdo->exec("
 
 
 echo "Loaded a total of $affectedRows records from this csv file.\n";
+
+fclose($csvfile);
 
 ?>
