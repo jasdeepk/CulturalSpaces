@@ -52,7 +52,16 @@ require(["jquery", "datatables"], (function ($) {
 				fillMap(data);
 				$("#table").DataTable({
             "sPaginationType": "full_numbers",
-             "iDisplayLength": 4
+             "iDisplayLength": 4,
+               "columns": [
+		    null,
+		    null,
+		    null,
+		    null,
+		    { "width": "10%" },
+		    null,
+		    null
+		  ]
             
         } );
 				

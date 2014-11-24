@@ -1,16 +1,24 @@
 html { height: 100% }
+@font-face {
+	font-family: Klinic;
+	src: url(KlinicSlab_Personal_License/KlinicSlabBook.otf);
+}
+@font-face {
+	font-family: KlinicBold;
+	src: url(KlinicSlab_Personal_License/KlinicSlabBold.otf);
+	}
 body { height: 100%; margin: 0; 
 	padding: 11em;
 	color: black;
 	background-color: #FBFBEF;  
-	font-family: Helvetica, Geneva, Arial, SunSans-Regular, sans-serif }
+	font-family: Klinic, Helvetica, Arial, SunSans-Regular, sans-serif }
 	#map-canvas { height: 40%; 
 		width: 100%;
 		margin: 0 auto 0 auto;}
 
 		#top-bar {
 			color: white;
-			font-family: Futura;
+			font-family: Futura, KlinicBold;
 			text-align: center;
 			font-size:50px;
 			text-decoration: none;
