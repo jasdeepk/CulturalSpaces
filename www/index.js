@@ -5,13 +5,21 @@ require(["jquery", "datatables"], (function ($) {
 		for (var i = 0; i <= rows.length-1; i++)
 		{
 			var row = rows[i];
+			// turn the sites in the web row into actual links
+			if (row['web'][0] == "h" && row['web'][1] == "t" && row['web'][2] == "t" && row['web'][3] == "p") {
+				var result = row['web'].link(row['web']);
+			}
+			if (row['web'] == "") {
+				var result = "";
+			}
+			else result = row['web'].link("http://"+row['web']);
 			var $row = 
 				$("<tr>")
 					.append("<td>"+row['lat']+"</td>")
 					.append("<td>"+row['lon']+"</td>")
 					.append("<td>"+row['name']+"</td>")
 					.append("<td>"+row['addr']+"</td>")
-					.append("<td>"+row['web']+"</td>")
+					.append("<td>"+result+"</td>")
 					.append("<td>"+row['type']+"</td>")
 					.append("<td>"+row['hood']+"</td>")
 			;
