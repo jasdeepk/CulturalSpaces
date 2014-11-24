@@ -13,7 +13,8 @@ require(["jquery", "datatables"], (function ($) {
 					.append("<td>"+row['addr']+"</td>")
 					.append("<td>"+row['web']+"</td>")
 					.append("<td>"+row['type']+"</td>")
-					.append("<td>"+row['hood']+"</td>");
+					.append("<td>"+row['hood']+"</td>")
+			;
 			$table.append($row);
 		}
 	}
@@ -35,7 +36,7 @@ require(["jquery", "datatables"], (function ($) {
     var marker = new google.maps.Marker({
       position: myLatlng,
       map: map,
-      title: 'Hello World!'
+      title: location.name
   });
     };
 
@@ -48,8 +49,24 @@ require(["jquery", "datatables"], (function ($) {
 			function (data) {
 				console.log("done");
 				fillTable(data);
-				$("#table").DataTable();
+
 				fillMap(data);
+				$("#table").DataTable({
+            "sPaginationType": "full_numbers",
+             "iDisplayLength": 4,
+               "columns": [
+		    null,
+		    null,
+		    null,
+		    null,
+		    { "width": "10%" },
+		    null,
+		    null
+		  ]
+            
+        } );
+				
+
 			}
 		);
 	});

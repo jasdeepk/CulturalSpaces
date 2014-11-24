@@ -1,86 +1,98 @@
 <!DOCTYPE html>
 <html>
-    <head>
+
+<head>
 
     <!-- DataTables CSS -->
-<link rel="stylesheet" type="text/css" href="/DataTables-1.10.4/media/css/jquery.dataTables.css">
+    <link rel="stylesheet" type="text/css" href="/DataTables-1.10.4/media/css/jquery.dataTables.css">
+    <!-- index stylesheets -->
+    <link rel="stylesheet" href="/css/index.css">
+    <!-- reset stylesheet -->
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.3.0/build/cssreset/reset-min.css">
 
+    <title>Cultural Spaces</title>
+    <!-- google sign-in -->
+    <script src="https://apis.google.com/js/client:platform.js" async defer></script>
+    <script type="text/javascript">
+    function signinCallback(authResult) {
+      if (authResult['status']['signed_in']) {
+                // Update the app to reflect a signed in user
+                // Hide the sign-in button now that the user is authorized, for example:
+                document.getElementById('signinButton').setAttribute('style', 'display: none');
+            } else {
+                // Update the app to reflect a signed out user
+                // Possible error values:
+                //   "user_signed_out" - User is signed-out
+                //   "access_denied" - User denied access to your app
+                //   "immediate_failed" - Could not automatically log in the user
+                console.log('Sign-in state: ' + authResult['error']);
+            }
+        }
 
-        <title>Cultural Spaces</title>
-        <!-- Google+ Sign-In/Google+ Share/Google+ Like -->
-        <script src="https://apis.google.com/js/client:platform.js" async defer></script>
-        <script type="text/javascript">
-        	function signinCallback(authResult) {
-        	  if (authResult['status']['signed_in']) {
-        	    // Update the app to reflect a signed in user
-        	    // Hide the sign-in button now that the user is authorized, for example:
-        	    document.getElementById('signinButton').setAttribute('style', 'display: none');
-        	  } else {
-        	    // Update the app to reflect a signed out user
-        	    // Possible error values:
-        	    //   "user_signed_out" - User is signed-out
-        	    //   "access_denied" - User denied access to your app
-        	    //   "immediate_failed" - Could not automatically log in the user
-        	    console.log('Sign-in state: ' + authResult['error']);
-        	  }
-        	}
         </script>
         <!-- end google sign-in -->
         <script data-main="index" src="require.js"></script>
         <script type="text/javascript">
-        	require.config({
-        	    //baseUrl: '',
-        	    paths: {
-        	        jquery: 'jquery-2.1.1',
+
+        require.config({
+                //baseUrl: '',
+                paths: {
+                    jquery: 'jquery-2.1.1',
                     datatables: 'jquery.dataTables'
-        	    },
+                },
                 shim: {
                     "datatables": ["jquery"]
                 }
-        	});
+            });
+
         </script>
 
-        <head>
-    <style type="text/css">
-      html { height: 100% }
-      body { height: 100%; margin: 0; padding: 0 }
-      #map-canvas { height: 40%; 
-                     width: 40%;}
-    </style>
-    <script type="text/javascript"
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCDJ525-htk7oLSiDCX3FopEs1UBY2K4JA">
-    </script>
+        
+
+        <script type="text/javascript"
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCDJ525-htk7oLSiDCX3FopEs1UBY2K4JA">
+        </script>
         <!--<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>-->
     </head>
     <body>
-        <div id="map-canvas"></div>
-        <!-- Google+ share -->
-        <div class="g-plus" data-action="share" data-annotation="inline" data-height="24"
-            data-href="https://plus.google.com/"></div>
-        <!-- Google+ like and sharable -->
-        <div class="g-plusone" data-size="tall" data-annotation="inline" data-width="300" 
-            data-href="https://plus.google.com/"></div>
-        <!-- Google sign-in button-->
-        <span id="signinButton">
-			<span
-			    class="g-signin"
-			    data-callback="signinCallback"
-			    data-clientid="183665922035-guv6irto0u06jqb7rah717vdhkd60rfe.apps.googleusercontent.com"
-			    data-cookiepolicy="single_host_origin"
-			    data-requestvisibleactions="http://schema.org/AddAction"
-			    data-scope="https://www.googleapis.com/auth/plus.login">
-	  		</span>
-		</span>
-		<!-- end google sign-in button -->
-		<table id="table">
-			<thead>
-				<td>Latitude</td>
-				<td>Longitude</td>
-				<td>Name</td>
-				<td>Address</td>
-                <td>Website</td>
-                <td>Type</td>
-                <td>Neighbourhood</td>
-			</thead>
-    </body>
+
+
+
+      <a id="top-bar" href="#index">CULTURAL SPACES</a>
+
+      
+      <div id="map-canvas"></div>
+
+      <!-- end google sign-in button -->
+      <table id="table"  border="0" cellpadding="0" cellspacing="0" class="pretty">
+        <thead>
+            <td>Latitude</td>
+            <td>Longitude</td>
+            <td>Name</td>
+            <td>Address</td>
+            <td>Web</td>
+            <td>Type</td>
+            <td>Hood</td>
+        </thead>
+    </table>
+    <!-- Google+ share -->
+    <div class="g-plus" data-action="share" data-annotation="inline" data-height="24"
+    data-href="https://plus.google.com/"></div>
+    <!-- Google+ like and sharable -->
+    <div class="g-plusone" data-size="tall" data-annotation="inline" data-width="300" 
+    data-href="https://plus.google.com/"></div>
+    <!-- Google sign-in button-->
+    <span id="signinButton">
+        <span
+        class="g-signin"
+        data-callback="signinCallback"
+        data-clientid="183665922035-guv6irto0u06jqb7rah717vdhkd60rfe.apps.googleusercontent.com"
+        data-cookiepolicy="single_host_origin"
+        data-requestvisibleactions="http://schema.org/AddAction"
+        data-scope="https://www.googleapis.com/auth/plus.login">
+    </span>
+</span>
+
+</body>
+
 </html>

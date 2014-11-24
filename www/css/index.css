@@ -1,0 +1,90 @@
+html { height: 100% }
+@font-face {
+	font-family: Klinic;
+	src: url(KlinicSlab_Personal_License/KlinicSlabBook.otf);
+}
+@font-face {
+	font-family: KlinicBold;
+	src: url(KlinicSlab_Personal_License/KlinicSlabBold.otf);
+	}
+body { height: 100%; margin: 0; 
+	padding: 11em;
+	color: black;
+	background-color: #FBFBEF;  
+	font-family: Klinic, Helvetica, Arial, SunSans-Regular, sans-serif }
+	#map-canvas { height: 40%; 
+		width: 100%;
+		margin: 0 auto 0 auto;}
+
+		#top-bar {
+			color: white;
+			font-family: Futura, KlinicBold;
+			text-align: center;
+			font-size:50px;
+			text-decoration: none;
+			display: block;
+			width: 100%;
+			background-color: #FFCCCC
+
+
+		}
+
+		div.dataTables_length {
+			float: left;
+			
+		}
+
+		div.dataTables_filter {
+			float: right;
+			
+		}
+
+		div.dataTables_info {
+			float: left;
+			
+		}
+
+		div.dataTables_paginate {
+			float: right;
+			
+		}
+
+		div.dataTables_length,
+		div.dataTables_filter,
+		div.dataTables_paginate,
+		div.dataTables_info {
+			padding: 6px;
+		}
+
+		table.pretty {
+    clear: both;
+}
+ 
+/* Self clearing - */
+div.dataTables_wrapper:after {
+    content: ".";
+    display: block;
+    clear: both;
+    visibility: hidden;
+    line-height: 0;
+    height: 0;
+}
+html[xmlns] .dataTables_wrapper { display: block; }
+* html .dataTables_wrapper { height: 1%; }
+
+table.pretty {
+    width: 100%;
+    clear: both;
+}
+ 
+table.pretty td,
+table.pretty th {
+    padding: 1px;
+    border: 1px solid #fff;
+}
+
+/* Header cells */
+table.pretty thead th {
+    text-align: center;
+    background: #66a9bd;
+}
