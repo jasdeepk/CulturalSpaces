@@ -15,6 +15,9 @@ require(["jquery", "datatables"], (function ($) {
 			else result = row['web'].link("http://"+row['web']);
 			var $row = 
 				$("<tr>")
+					.append("<td class='star' id='"
+						+row['name']
+						+"'></td>")
 					.append("<td>"+row['lat']+"</td>")
 					.append("<td>"+row['lon']+"</td>")
 					.append("<td>"+row['name']+"</td>")
@@ -49,6 +52,9 @@ require(["jquery", "datatables"], (function ($) {
     };
 
 }
+
+
+
 	
 	$(document).ready(function () {
 		console.log("ready");
@@ -60,22 +66,32 @@ require(["jquery", "datatables"], (function ($) {
 
 				fillMap(data);
 				$("#table").DataTable({
-            "sPaginationType": "full_numbers",
-             "iDisplayLength": 4,
-               "columns": [
-		    null,
-		    null,
-		    null,
-		    null,
-		    { "width": "10%" },
-		    null,
-		    null
-		  ]
+		            "sPaginationType": "full_numbers",
+		             "iDisplayLength": 4,
+		             "columns": [
+				    null,
+				    null,
+				    null,
+				    null,
+				    { "width": "10%" },
+				    null,
+				    null
+				  ]
             
-        } );
+        		} );
 				
 
 			}
 		);
-	});
+    $('html').on('click', '.star', function() {
+    	console.log('clicked');
+        var id = $(this).attr('id');
+        $(this).toggleClass('favorited');
+        $.post('/favourite.php', 
+               {'isFavorited': $(this).hasClass('favorited'), 'id': id},
+                  function(data) { 
+                     //some sort of update function here
+                  });
+        });
+     });
 }));
