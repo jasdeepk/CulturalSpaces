@@ -65,6 +65,7 @@ require(["jquery", "datatables"], (function ($) {
 				fillTable(data);
 
 				fillMap(data);
+
 				$("#table").DataTable({
 		            "sPaginationType": "full_numbers",
 		             "iDisplayLength": 4,
@@ -76,11 +77,18 @@ require(["jquery", "datatables"], (function ($) {
 				    { "width": "10%" },
 				    null,
 				    null
-				  ]
-            
+				  ],
+				     "aoColumns": [
+  					{ "bSortable": false },
+  					null,
+  					null,
+  					null,
+  					null,
+ 					null,
+  					null,
+  					null,
+  					]
         		} );
-				
-
 			}
 		);
     $('html').on('click', '.star', function() {
