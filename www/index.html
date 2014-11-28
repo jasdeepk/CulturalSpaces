@@ -13,24 +13,8 @@
     <title>Cultural Spaces</title>
     <!-- google sign-in -->
     <script src="https://apis.google.com/js/client:platform.js?onload=start" async defer></script>
-    <script type="text/javascript">
-    function signinCallback(authResult) {
-      if (authResult['status']['signed_in']) {
-                // Update the app to reflect a signed in user
-                // Hide the sign-in button now that the user is authorized, for example:
-                document.getElementById('signinButton').setAttribute('style', 'display: none');
-            } else {
-                // Update the app to reflect a signed out user
-                // Possible error values:
-                //   "user_signed_out" - User is signed-out
-                //   "access_denied" - User denied access to your app
-                //   "immediate_failed" - Could not automatically log in the user
-                console.log('Sign-in state: ' + authResult['error']);
-            }
-        }
-
-        </script>
-        <!-- end google sign-in -->
+    
+    
         <script data-main="index" src="require.js"></script>
         <script type="text/javascript">
 
@@ -82,61 +66,200 @@
     <!-- Google+ like and sharable -->
     <div class="g-plusone" data-size="tall" data-annotation="inline" data-width="300" 
     data-href="https://plus.google.com/"></div>
-    <!-- Google sign-in button-->
-    <div id="signinButton">
+   
+
+<meta name="google-signin-clientid" content="183665922035-guv6irto0u06jqb7rah717vdhkd60rfe.apps.googleusercontent.com" />
+<meta name="google-signin-scope" content="https://www.googleapis.com/auth/plus.login" />
+<meta name="google-signin-requestvisibleactions" content="http://schema.org/AddAction" />
+<meta name="google-signin-cookiepolicy" content="single_host_origin" />
+<meta name="google-signin-callback" content="signInCallback" />
+
+<script src="https://apis.google.com/js/client:platform.js?onload=render" async defer>
+ /* Executed when the APIs finish loading */
+ function render() {
+    debugger;
+   // Additional params including the callback, the rest of the params will
+   // come from the page-level configuration.
+   var additionalParams = {
+     'callback': signInCallback
+   };
+   
+   // Attach a click listener to a button to trigger the flow.
+   var signInButton = document.getElementById('signInButton');
+   signinButton.addEventListener('click', function() {
+     gapi.auth.signIn(additionalParams); // Will use page level configuration
+   });
+ }
+</script>
+
+
+
+ <!-- Google sign-in button-->
+    <div id="signInButton">
         <span
         class="g-signin"
+        data-scope="https://www.googleapis.com/auth/plus.login"
+        data-requestvisibleactions="http://schemas.google.com/AddActivity"
         data-clientid="183665922035-guv6irto0u06jqb7rah717vdhkd60rfe.apps.googleusercontent.com"
         data-redirecturi="postmessage"
-        data-accesstype="offline"
         data-cookiepolicy="single_host_origin"
-        data-requestvisibleactions="http://schema.org/AddAction"
-        data-scope="https://www.googleapis.com/auth/plus.login"
-        data-callback="signinCallback">
+        data-callback="signInCallback">
         </span>
     </div>
 <div id="result"></div>
 
+  <div id="authOps" style="display:none">
+    <h2>User is now signed in to the app using Google+</h2>
+    <p>If the user chooses to disconnect, the app must delete all stored
+    information retrieved from Google for the given user.</p>
+    <button id="disconnect" >Disconnect your Google account from this app</button>
 
-<!-- Last part of BODY element in file index.html -->
-<script>
-function signInCallback(authResult) {
-  if (authResult['code']) {
+    <h2>User's profile information</h2>
+    <div id="profile"></div>
 
-    // Hide the sign-in button now that the user is authorized, for example:
-    $('#signinButton').attr('style', 'display: none');
+    <h2>User's friends that are visible to this app</h2>
+    <div id="visiblePeople"></div>
 
-    // Send the code to the server
-    $.ajax({
-      type: 'POST',
-      url: 'plus.php?storeToken',
-      contentType: 'application/octet-stream; charset=utf-8',
-      success: function(result) {
-        // Handle or verify the server response if necessary.
+    <h2>Authentication Logs</h2>
+    <pre id="authResult"></pre>
+  </div>
 
-        // Prints the list of people that the user has allowed the app to know
-        // to the console.
-        console.log(result);
-        if (result['profile'] && result['people']){
-          $('#results').html('Hello ' + result['profile']['displayName'] + '. You successfully made a server side call to people.get and people.list');
-        } else {
-          $('#results').html('Failed to make a server-side call. Check your configuration and console.');
-
-        }
-      },
-      processData: false,
-      data: authResult['code']
-    });
-  } else if (authResult['error']) {
-    // There was an error.
-    // Possible error codes:
-    //   "access_denied" - User denied access to your app
-    //   "immediate_failed" - Could not automatially log in the user
-    // console.log('There was an error: ' + authResult['error']);
-  }
-}
-</script>
 
 </body>
+
+<script type="text/javascript">
+var helper = (function() {
+  var BASE_API_PATH = 'plus/v1/';
+
+  return {
+    /**
+     * Hides the sign in button and starts the post-authorization operations.
+     *
+     * @param {Object} authResult An Object which contains the access token and
+     *   other authentication information.
+     */
+    signInCallback: function(authResult) {
+      gapi.client.load('plus','v1').then(function() {
+        $('#authResult').html('Auth Result:<br/>');
+        for (var field in authResult) {
+          $('#authResult').append(' ' + field + ': ' +
+              authResult[field] + '<br/>');
+        }
+        if (authResult['access_token']) {
+          $('#authOps').show('slow');
+          $('#gConnect').hide();
+          helper.profile();
+          helper.people();
+        } else if (authResult['error']) {
+          // There was an error, which means the user is not signed in.
+          // As an example, you can handle by writing to the console:
+          console.log('There was an error: ' + authResult['error']);
+          $('#authResult').append('Logged out');
+          $('#authOps').hide('slow');
+          $('#gConnect').show();
+        }
+        console.log('authResult', authResult);
+      });
+    },
+
+    /**
+     * Calls the OAuth2 endpoint to disconnect the app for the user.
+     */
+    disconnect: function() {
+      // Revoke the access token.
+      $.ajax({
+        type: 'GET',
+        url: 'https://accounts.google.com/o/oauth2/revoke?token=' +
+            gapi.auth.getToken().access_token,
+        async: false,
+        contentType: 'application/json',
+        dataType: 'jsonp',
+        success: function(result) {
+          console.log('revoke response: ' + result);
+          $('#authOps').hide();
+          $('#profile').empty();
+          $('#visiblePeople').empty();
+          $('#authResult').empty();
+          $('#gConnect').show();
+        },
+        error: function(e) {
+          console.log(e);
+        }
+      });
+    },
+
+    /**
+     * Gets and renders the list of people visible to this app.
+     */
+    people: function() {
+      gapi.client.plus.people.list({
+        'userId': 'me',
+        'collection': 'visible'
+      }).then(function(res) {
+        var people = res.result;
+        $('#visiblePeople').empty();
+        $('#visiblePeople').append('Number of people visible to this app: ' +
+            people.totalItems + '<br/>');
+        for (var personIndex in people.items) {
+          person = people.items[personIndex];
+          $('#visiblePeople').append('<img src="' + person.image.url + '">');
+        }
+      });
+    },
+
+    /**
+     * Gets and renders the currently signed in user's profile data.
+     */
+    profile: function(){
+      gapi.client.plus.people.get({
+        'userId': 'me'
+      }).then(function(res) {
+        debugger;
+        var profile = res.result;
+        $('#profile').empty();
+        $('#profile').append(
+            $('<p><img src=\"' + profile.image.url + '\"></p>'));
+        $('#profile').append(
+            $('<p>Hello ' + profile.displayName + '!<br />Tagline: ' +
+            profile.tagline + '<br />About: ' + profile.aboutMe + '</p>'));
+        if (profile.cover && profile.coverPhoto) {
+          $('#profile').append(
+              $('<p><img src=\"' + profile.cover.coverPhoto.url + '\"></p>'));
+        }
+      }, function(err) {
+        var error = err.result;
+        $('#profile').empty();
+        $('#profile').append(error.message);
+      });
+    }
+  };
+})();
+
+// This sample assumes a client object has been created.
+// To learn more about creating a client, check out the starter:
+//  https://developers.google.com/+/quickstart/javascript
+var request = gapi.client.plus.people.get({
+  'userId' : 'me'
+});
+
+request.execute(function(resp) {
+  console.log('ID: ' + resp.id);
+  console.log('Display Name: ' + resp.displayName);
+  console.log('Image URL: ' + resp.image.url);
+  console.log('Profile URL: ' + resp.url);
+});
+
+/**
+ * Calls the helper method that handles the authentication flow.
+ *
+ * @param {Object} authResult An Object which contains the access token and
+ *   other authentication information.
+ */
+function signInCallback(authResult) {
+   // Hide the sign-in button now that the user is authorized, for example:
+    $('#signInButton').attr('style', 'display: none');
+  helper.signInCallback(authResult);
+}
+</script>
 
 </html>
