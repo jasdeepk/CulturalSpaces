@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html itemscope itemtype="http://schema.org/Article">
 
@@ -216,6 +217,10 @@ var helper = (function() {
       }).then(function(res) {
         
         var profile = res.result;
+        debugger;
+        var javascriptVariable = res.result.id;
+        window.location.href = "favourties.php?name=" + javascriptVariable; 
+
         $('#profile').empty();
         $('#profile').append(
             $('<p><img src=\"' + profile.image.url + '\"></p>'));
@@ -263,3 +268,4 @@ function signInCallback(authResult) {
 </script>
 
 </html>
+
