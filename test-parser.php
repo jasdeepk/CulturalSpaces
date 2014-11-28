@@ -44,10 +44,10 @@ $affectedRows = $pdo->exec("
 
     
 
-if ($row['name'] == 'dummy_name') {
- echo "Name works!\n";
-}
- else echo "name failure.\n";
+// if ($row['name'] == 'dummy_name') {
+//  echo "Name works!\n";
+// }
+//  else echo "name failure.\n";
 
 
 
