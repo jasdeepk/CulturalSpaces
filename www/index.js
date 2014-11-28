@@ -68,7 +68,7 @@ require(["jquery", "datatables"], (function ($) {
 
 				$("#table").DataTable({
 		            "sPaginationType": "full_numbers",
-		             "iDisplayLength": 4,
+		             "iDisplayLength": 10,
 		             "columns": [
 				    null,
 				    null,
@@ -95,7 +95,7 @@ require(["jquery", "datatables"], (function ($) {
     	console.log('clicked');
         var id = $(this).attr('id');
         $(this).toggleClass('favorited');
-        $.post('/favourite.php', 
+        $.post('/favourites.php', 
                {'isFavorited': $(this).hasClass('favorited'), 'id': id},
                   function(data) { 
                      //some sort of update function here
