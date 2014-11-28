@@ -140,16 +140,16 @@ var helper = (function() {
      */
     signInCallback: function(authResult) {
       gapi.client.load('plus','v1').then(function() {
-        $('#authResult').html('Auth Result:<br/>');
-        for (var field in authResult) {
-          $('#authResult').append(' ' + field + ': ' +
-              authResult[field] + '<br/>');
-        }
+        // $('#authResult').html('Auth Result:<br/>');
+        // for (var field in authResult) {
+        //   $('#authResult').append(' ' + field + ': ' +
+        //       authResult[field] + '<br/>');
+        // }
         if (authResult['access_token']) {
-          $('#authOps').show('slow');
-          $('#gConnect').hide();
+          // $('#authOps').show('slow');
+          // $('#gConnect').hide();
           helper.profile();
-          helper.people();
+          // helper.people();
         } else if (authResult['error']) {
           // There was an error, which means the user is not signed in.
           // As an example, you can handle by writing to the console:
@@ -191,21 +191,21 @@ var helper = (function() {
     /**
      * Gets and renders the list of people visible to this app.
      */
-    people: function() {
-      gapi.client.plus.people.list({
-        'userId': 'me',
-        'collection': 'visible'
-      }).then(function(res) {
-        var people = res.result;
-        $('#visiblePeople').empty();
-        $('#visiblePeople').append('Number of people visible to this app: ' +
-            people.totalItems + '<br/>');
-        for (var personIndex in people.items) {
-          person = people.items[personIndex];
-          $('#visiblePeople').append('<img src="' + person.image.url + '">');
-        }
-      });
-    },
+    // people: function() {
+    //   gapi.client.plus.people.list({
+    //     'userId': 'me',
+    //     'collection': 'visible'
+    //   }).then(function(res) {
+    //     var people = res.result;
+    //     $('#visiblePeople').empty();
+    //     $('#visiblePeople').append('Number of people visible to this app: ' +
+    //         people.totalItems + '<br/>');
+    //     for (var personIndex in people.items) {
+    //       person = people.items[personIndex];
+    //       $('#visiblePeople').append('<img src="' + person.image.url + '">');
+    //     }
+    //   });
+    // },
 
     /**
      * Gets and renders the currently signed in user's profile data.
@@ -214,7 +214,7 @@ var helper = (function() {
       gapi.client.plus.people.get({
         'userId': 'me'
       }).then(function(res) {
-        debugger;
+        
         var profile = res.result;
         $('#profile').empty();
         $('#profile').append(
@@ -235,19 +235,19 @@ var helper = (function() {
   };
 })();
 
-// This sample assumes a client object has been created.
-// To learn more about creating a client, check out the starter:
-//  https://developers.google.com/+/quickstart/javascript
-var request = gapi.client.plus.people.get({
-  'userId' : 'me'
-});
+// // This sample assumes a client object has been created.
+// // To learn more about creating a client, check out the starter:
+// //  https://developers.google.com/+/quickstart/javascript
+// var request = gapi.client.plus.people.get({
+//   'userId' : 'me'
+// });
 
-request.execute(function(resp) {
-  console.log('ID: ' + resp.id);
-  console.log('Display Name: ' + resp.displayName);
-  console.log('Image URL: ' + resp.image.url);
-  console.log('Profile URL: ' + resp.url);
-});
+// request.execute(function(resp) {
+//   console.log('ID: ' + resp.id);
+//   console.log('Display Name: ' + resp.displayName);
+//   console.log('Image URL: ' + resp.image.url);
+//   console.log('Profile URL: ' + resp.url);
+// });
 
 /**
  * Calls the helper method that handles the authentication flow.
