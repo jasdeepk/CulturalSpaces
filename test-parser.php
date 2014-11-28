@@ -1,7 +1,7 @@
 <?php
 $databasehost = "localhost"; 
-$databasename = "culturalspaces"; 
-$databasetable = "test"; 
+$databasename = "test_db"; 
+$databasetable = "test_table"; 
 $databaseusername="root"; 
 $databasepassword = ""; 
 $fieldseparator = ",";
@@ -23,13 +23,13 @@ try {
         )
     );
     */
-    $pdo = new PDO('mysql:host=localhost;port=3306;dbname=culturalspaces', "root", "root", array(PDO::MYSQL_ATTR_LOCAL_INFILE=>1));
+    $pdo = new PDO('mysql:host=localhost;port=3306;dbname=test_db', "root", "root", array(PDO::MYSQL_ATTR_LOCAL_INFILE=>1));
 } catch (PDOException $e) {
     die("database connection failed: ".$e->getMessage());
 }
 
 //clear table
-$pdo->exec("TRUNCATE TABLE locations");
+$pdo->exec("TRUNCATE TABLE test_table");
 
 //parse file's data into table
 $affectedRows = $pdo->exec("
@@ -42,11 +42,13 @@ $affectedRows = $pdo->exec("
 /*echo "Loaded a total of $affectedRows records from this csv file.\n"; */
 
 
+    
 
-if ($row['name'] == 'dummy') {
+if ($row['name'] == 'dummy_name') {
  echo "Name works!\n";
 }
  else echo "name failure.\n";
+
 
 
 ?>
