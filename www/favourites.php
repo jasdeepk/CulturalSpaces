@@ -1,10 +1,11 @@
 <?php
-ini_set('error_reporting', E_ALL);
-ini_set('display_errors', "stdout");
-
-if (isset($_GET['var_PHP_data'])) {
-      echo $_GET['var_PHP_data'];;
-      $userID = $_GET['var_PHP_data'];
+error_reporting (-1);
+ini_set('display_errors', -1);
+ini_set("display_errors", 1);
+echo 'hi';
+if (isset($_POST['variable'])) {
+      echo $_POST['variable'];
+      $userID = $_POST['variable'];
     } 
 
 try {

@@ -95,7 +95,7 @@ require(["jquery", "datatables"], (function ($) {
     	console.log('clicked');
         var id = $(this).attr('id');
         $(this).toggleClass('favorited');
-        $.post('/favourite.php', 
+        $.post('/favourites.php', 
                {'isFavorited': $(this).hasClass('favorited'), 'id': id},
                   function(data) { 
                      //some sort of update function here

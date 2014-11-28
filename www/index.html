@@ -218,8 +218,8 @@ var helper = (function() {
         
         var profile = res.result;
         debugger;
-        var javascriptVariable = res.result.id;
-        window.location.href = "favourties.php?name=" + javascriptVariable; 
+        var userID = res.result.id;
+        $.post('favourites.php', {variable: userID});
 
         $('#profile').empty();
         $('#profile').append(
