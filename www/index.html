@@ -3,6 +3,11 @@
 <html itemscope itemtype="http://schema.org/Article">
 
 <head>
+    <meta name="google-signin-clientid" content="183665922035-guv6irto0u06jqb7rah717vdhkd60rfe.apps.googleusercontent.com" />
+    <meta name="google-signin-scope" content="https://www.googleapis.com/auth/plus.login" />
+    <meta name="google-signin-requestvisibleactions" content="http://schema.org/AddAction" />
+    <meta name="google-signin-cookiepolicy" content="single_host_origin" />
+    <meta name="google-signin-callback" content="signInCallback" />
 
     <!-- DataTables CSS -->
     <link rel="stylesheet" type="text/css" href="/DataTables-1.10.4/media/css/jquery.dataTables.css">
@@ -40,9 +45,6 @@
         <!--<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>-->
     </head>
     <body>
-
-
-
       <a id="top-bar" href="#index">CULTURAL SPACES</a>
 
       
@@ -67,13 +69,6 @@
     <!-- Google+ like and sharable -->
     <div class="g-plusone" data-size="tall" data-annotation="inline" data-width="300" 
     data-href="https://plus.google.com/"></div>
-   
-
-<meta name="google-signin-clientid" content="183665922035-guv6irto0u06jqb7rah717vdhkd60rfe.apps.googleusercontent.com" />
-<meta name="google-signin-scope" content="https://www.googleapis.com/auth/plus.login" />
-<meta name="google-signin-requestvisibleactions" content="http://schema.org/AddAction" />
-<meta name="google-signin-cookiepolicy" content="single_host_origin" />
-<meta name="google-signin-callback" content="signInCallback" />
 
 <script src="https://apis.google.com/js/client:platform.js?onload=render" async defer>
  /* Executed when the APIs finish loading */
@@ -93,8 +88,6 @@
  }
 </script>
 
-
-
  <!-- Google sign-in button-->
     <div id="signInButton">
         <span
@@ -108,23 +101,6 @@
         </span>
     </div>
 <div id="result"></div>
-
-  <div id="authOps" style="display:none">
-    <h2>User is now signed in to the app using Google+</h2>
-    <p>If the user chooses to disconnect, the app must delete all stored
-    information retrieved from Google for the given user.</p>
-    <button id="disconnect" >Disconnect your Google account from this app</button>
-
-    <h2>User's profile information</h2>
-    <div id="profile"></div>
-
-    <h2>User's friends that are visible to this app</h2>
-    <div id="visiblePeople"></div>
-
-    <h2>Authentication Logs</h2>
-    <pre id="authResult"></pre>
-  </div>
-
 
 </body>
 
@@ -149,7 +125,6 @@ var helper = (function() {
         if (authResult['access_token']) {
           // $('#authOps').show('slow');
           // $('#gConnect').hide();
-          helper.profile();
           // helper.people();
         } else if (authResult['error']) {
           // There was an error, which means the user is not signed in.
@@ -159,7 +134,6 @@ var helper = (function() {
           $('#authOps').hide('slow');
           $('#gConnect').show();
         }
-        console.log('authResult', authResult);
       });
     },
 
@@ -187,72 +161,9 @@ var helper = (function() {
           console.log(e);
         }
       });
-    },
-
-    /**
-     * Gets and renders the list of people visible to this app.
-     */
-    // people: function() {
-    //   gapi.client.plus.people.list({
-    //     'userId': 'me',
-    //     'collection': 'visible'
-    //   }).then(function(res) {
-    //     var people = res.result;
-    //     $('#visiblePeople').empty();
-    //     $('#visiblePeople').append('Number of people visible to this app: ' +
-    //         people.totalItems + '<br/>');
-    //     for (var personIndex in people.items) {
-    //       person = people.items[personIndex];
-    //       $('#visiblePeople').append('<img src="' + person.image.url + '">');
-    //     }
-    //   });
-    // },
-
-    /**
-     * Gets and renders the currently signed in user's profile data.
-     */
-    profile: function(){
-      gapi.client.plus.people.get({
-        'userId': 'me'
-      }).then(function(res) {
-        
-        var profile = res.result;
-        debugger;
-        var userID = res.result.id;
-        $.post('favourites.php', {variable: userID});
-
-        $('#profile').empty();
-        $('#profile').append(
-            $('<p><img src=\"' + profile.image.url + '\"></p>'));
-        $('#profile').append(
-            $('<p>Hello ' + profile.displayName + '!<br />Tagline: ' +
-            profile.tagline + '<br />About: ' + profile.aboutMe + '</p>'));
-        if (profile.cover && profile.coverPhoto) {
-          $('#profile').append(
-              $('<p><img src=\"' + profile.cover.coverPhoto.url + '\"></p>'));
-        }
-      }, function(err) {
-        var error = err.result;
-        $('#profile').empty();
-        $('#profile').append(error.message);
-      });
     }
   };
 })();
-
-// // This sample assumes a client object has been created.
-// // To learn more about creating a client, check out the starter:
-// //  https://developers.google.com/+/quickstart/javascript
-// var request = gapi.client.plus.people.get({
-//   'userId' : 'me'
-// });
-
-// request.execute(function(resp) {
-//   console.log('ID: ' + resp.id);
-//   console.log('Display Name: ' + resp.displayName);
-//   console.log('Image URL: ' + resp.image.url);
-//   console.log('Profile URL: ' + resp.url);
-// });
 
 /**
  * Calls the helper method that handles the authentication flow.
