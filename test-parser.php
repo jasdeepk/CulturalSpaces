@@ -42,13 +42,19 @@ $affectedRows = $pdo->exec("
 /*echo "Loaded a total of $affectedRows records from this csv file.\n"; */
 
 
-    
+$dbh = new PDO('mysql:host=localhost;port=3306;dbname=test_db', "root", "root");
+    $statement = $dbh->query('SELECT * from test_table');
+    $rows = $statement->fetchAll(PDO::FETCH_ASSOC);
+   
+$test_array = array(
+    array(dummy_name1 => "1", dummy_name2 => "a"),
+    array(dummy_name1 => "2", dummy_name2 => "b")
+    )
 
-// if ($row['name'] == 'dummy_name') {
-//  echo "Name works!\n";
-// }
-//  else echo "name failure.\n";
-
-
+if (($rows[0] == $test_array[0]) && ($rows[1] == $test_array[1]))
+    {
+ echo "Works!\n";
+}
+ else echo "Failure.\n";
 
 ?>
